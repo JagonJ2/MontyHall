@@ -40,22 +40,10 @@ public class MontyHallGuessingGameExercise_Fixed {
     }
 
 
-    private static int switchDoor(int playerChoice, int montysChoice) {
-        for (int i = 0; i < 3; i++) {
-            if (i != playerChoice || i != montysChoice) { // todo &&
-                return i;
-            }
-        }
-        return playerChoice;
-    }
-
-
-    private static boolean playerWantsToSwitchDoor(Scanner scan) {
-        String choice = scan.nextLine().trim();
-        if (choice.equals("yes")) {
-            return true;
-        }
-        return false;
+    public static void randomlyPlaceAPrize(int[] doors) {
+        Random random = new Random();
+        int randomNumber = random.nextInt(doors.length - 1); // stog +1.
+        doors[randomNumber] = 1;
     }
 
 
@@ -72,22 +60,6 @@ public class MontyHallGuessingGameExercise_Fixed {
     }
 
 
-    private static void determineWinner(int[] doors, int playerChoice) {
-        if (doors[playerChoice] == 1) {
-            System.out.println("You won!");
-        } else {
-            System.out.println("You got the goat! :(");
-        }
-    }
-
-
-    public static void randomlyPlaceAPrize(int[] doors) {
-        Random random = new Random();
-        int randomNumber = random.nextInt(doors.length + 1); // todo det ska stå -1
-        doors[randomNumber] = 1;
-    }
-
-
     public static void openDoor(int n, int[] doors) {
         String contains = "";
         if (doors[n] == 0) {
@@ -98,6 +70,34 @@ public class MontyHallGuessingGameExercise_Fixed {
         ;
 
         System.out.println("Monty opens door " + n + " and shows you a " + contains);
+    }
+
+
+    private static boolean playerWantsToSwitchDoor(Scanner scan) {
+        String choice = scan.nextLine().trim();
+        if (choice.equals("yes")) {
+            return true;
+        }
+        return false;
+    }
+
+
+    private static int switchDoor(int playerChoice, int montysChoice) {
+        for (int i = 0; i < 3; i++) {
+            if (i != playerChoice && i != montysChoice) { // det stog ||
+                return i;
+            }
+        }
+        return playerChoice;
+    }
+
+
+    private static void determineWinner(int[] doors, int playerChoice) {
+        if (doors[playerChoice] == 1) {
+            System.out.println("You won!");
+        } else {
+            System.out.println("You got the goat! :(");
+        }
     }
 }
 
