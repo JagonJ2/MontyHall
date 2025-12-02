@@ -42,7 +42,7 @@ public class MontyHallGuessingGameExercise_Fixed {
 
     private static int switchDoor(int playerChoice, int montysChoice) {
         for (int i = 0; i < 3; i++) {
-            if (i != playerChoice || i != montysChoice) {
+            if (i != playerChoice || i != montysChoice) { // todo &&
                 return i;
             }
         }
