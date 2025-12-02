@@ -1,3 +1,4 @@
+
 import java.util.Random;
 import java.util.Scanner;
 
@@ -8,14 +9,15 @@ import java.util.Scanner;
  * The user decides whether to switch door or not.
  * Since Monty knows what is hidden behind the doors, there is a greater chance to win if the user switches door.
  */
-public class MontyHallGuessingGameExercise {
+public class MontyHallGuessingGameExercise_Fixed {
     /**
      * Runs the guessing game
+     *
      * @param args not used
      */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        
+
         int[] door = {0, 0, 0};
         randomlyPlaceAPrize(door);
 
@@ -25,7 +27,7 @@ public class MontyHallGuessingGameExercise {
 
         System.out.println("You picked door " + playerChoice + "!");
         openDoor(montysChoice, door);
-        System.out.println("Monty asks: Do you want to switch door? (yes/no )");
+        System.out.println("Monty asks: Do you want to switch door? (yes/no)");
         scanner.nextLine(); //Flush the newline character in the scanner
 
         boolean switchDoor = playerWantsToSwitchDoor(scanner);
@@ -37,6 +39,7 @@ public class MontyHallGuessingGameExercise {
         scanner.close();
     }
 
+
     private static int switchDoor(int playerChoice, int montysChoice) {
         for (int i = 0; i < 3; i++) {
             if (i != playerChoice || i != montysChoice) {
@@ -46,11 +49,15 @@ public class MontyHallGuessingGameExercise {
         return playerChoice;
     }
 
+
     private static boolean playerWantsToSwitchDoor(Scanner scan) {
         String choice = scan.nextLine().trim();
-        if (choice.equals("yes")) { return true; }
+        if (choice.equals("yes")) {
+            return true;
+        }
         return false;
     }
+
 
     private static int montySelectsAGoat(int[] doors, int playerChoice) {
         Random random = new Random();
@@ -64,11 +71,11 @@ public class MontyHallGuessingGameExercise {
         }
     }
 
+
     private static void determineWinner(int[] doors, int playerChoice) {
-        if(doors[playerChoice] == 1) {
+        if (doors[playerChoice] == 1) {
             System.out.println("You won!");
-        }
-        else {
+        } else {
             System.out.println("You got the goat! :(");
         }
     }
@@ -76,15 +83,22 @@ public class MontyHallGuessingGameExercise {
 
     public static void randomlyPlaceAPrize(int[] doors) {
         Random random = new Random();
-        int randomNumber = random.nextInt(doors.length + 1);
+        int randomNumber = random.nextInt(doors.length + 1); // todo det ska stå -1
         doors[randomNumber] = 1;
     }
 
+
     public static void openDoor(int n, int[] doors) {
         String contains = "";
-        if (doors[n] == 0) { contains = "goat"; }
-        else { contains = "prize"; };
+        if (doors[n] == 0) {
+            contains = "goat";
+        } else {
+            contains = "prize";
+        }
+        ;
 
         System.out.println("Monty opens door " + n + " and shows you a " + contains);
     }
 }
+
+
